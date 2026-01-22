@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Luxury Clock</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #1c1c1c;
+      /* Deep obsidian background */
+    }
+
+    .clock-container {
+      position: relative;
+      background: #1c1c1c;
+      border-radius: 50px;
+      border: 8px solid #2e2e2e;
+      box-shadow: 25px 25px 75px rgba(0, 0, 0, 0.75),
+        10px 10px 70px rgba(0, 0, 0, 0.25),
+        inset 5px 5px 10px rgba(0, 0, 0, 0.5),
+        inset 5px 5px 20px rgba(255, 255, 255, 0.2),
+        inset -5px -5px 15px rgba(0, 0, 0, 0.75);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .clock {
+      position: relative;
+      width: 350px;
+      height: 350px;
+      background: #1c1c1c;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .clock::before {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: #fff;
+      border-radius: 50%;
+      z-index: 1000;
+    }
+
+    /* Luxury Hands and Numbers */
+    .clock span {
+      position: absolute;
+      inset: 20px;
+      color: #fff;
+      text-align: center;
+      transform: rotate(calc(30deg * var(--i)));
+    }
+
+    .clock span b {
+      font-size: 1.5em;
+      opacity: 0.25;
+      font-weight: 600;
+      display: inline-block;
+      transform: rotate(calc(-30deg * var(--i)));
+    }
+
+    .circle {
+      position: absolute;
+      width: 230px;
+      height: 230px;
+      border: 2px solid rgba(0, 0, 0, 0.25);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      z-index: 10;
+    }
+
+    .circle i {
+      position: absolute;
+      width: 4px;
+      height: 50%;
+      background: var(--clr);
+      opacity: 0.75;
+      transform-origin: bottom;
+      transform: scaleY(0.5);
+    }
+
+    .circle2 {
+      width: 180px;
+      height: 180px;
+      z-index: 9;
+    }
+
+    .circle3 {
+      width: 130px;
+      height: 130px;
+      z-index: 8;
+    }
+
+    /* The Glowing Effect */
+    .circle::before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 10px;
+      background: var(--clr);
+      border-radius: 50%;
+      box-shadow: 0 0 20px var(--clr), 0 0 60px var(--clr);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="clock-container">
+    <div class="clock">
+      <div class="circle" id="sc" style="--clr:#0ef;"><i></i></div>
+      <div class="circle circle2" id="mn" style="--clr:#fee800;"><i></i></div>
+      <div class="circle circle3" id="hr" style="--clr:#ff2972;"><i></i></div>
+
+      <span style="--i:1;"><b>1</b></span>
+      <span style="--i:2;"><b>2</b></span>
+      <span style="--i:3;"><b>3</b></span>
+      <span style="--i:4;"><b>4</b></span>
+      <span style="--i:5;"><b>5</b></span>
+      <span style="--i:6;"><b>6</b></span>
+      <span style="--i:7;"><b>7</b></span>
+      <span style="--i:8;"><b>8</b></span>
+      <span style="--i:9;"><b>9</b></span>
+      <span style="--i:10;"><b>10</b></span>
+      <span style="--i:11;"><b>11</b></span>
+      <span style="--i:12;"><b>12</b></span>
+    </div>
+  </div>
+  <script src="script.js"></script>
+  <script>
+    let hr = document.querySelector('#hr');
+    let mn = document.querySelector('#mn');
+    let sc = document.querySelector('#sc');
+
+    setInterval(() => {
+      let day = new Date();
+      let hh = day.getHours() * 30;
+      let mm = day.getMinutes() * 6;
+      let ss = day.getSeconds() * 6;
+
+      // Adding smooth rotation
+      hr.style.transform = `rotateZ(${hh + (mm / 12)}deg)`;
+      mn.style.transform = `rotateZ(${mm}deg)`;
+      sc.style.transform = `rotateZ(${ss}deg)`;
+    });
+  </script>
+</body>
+
+</html>
